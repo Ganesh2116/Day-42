@@ -96,52 +96,977 @@ class ArrayQ1
 }
 ===================================================================================
 ===================================================================================
+/*
+2.Write a Java program to shuffle a given array of integers.  
+Example:
+Input :
+nums = { 1, 2, 3, 4, 5, 6 }
+Output:
+Shuffle Array: [4, 2, 6, 5, 1, 3]
+*/
+
+import java.util.Random;
+
+class ArrayQ2
+{
+	public static void main(String[] arge)
+	{
+	Random ra = new Random();
+	int a[] = { 1, 2, 3, 4, 5, 6 };
+	
+	System.out.println("Normal Array :");
+	for (int i=0;i<a.length;i++)
+	{
+		System.out.print(a[i]+" ");		
+	}
+
+	
+	for (int i=0;i<a.length;i++)
+	{
+		int j = ra.nextInt(i+1);
+		int temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;		
+	}
+	
+	System.out.println("\nShuffle Array :");
+	for (int i=0;i<a.length;i++)
+	{
+		System.out.print(a[i]+" ");		
+	}
+	
+	}
+}
+===================================================================================
+===================================================================================
+/*
+3.Write a Java program to rearrange a given array of unique elements such that every second element of the array is greater than its left and right elements.  
+
+Example:
+Input :
+nums= { 1, 2, 4, 9, 5, 3, 8, 7, 10, 12, 14 }
+Output:
+Array with every second element is greater than its left and right elements:
+[1, 4, 2, 9, 3, 8, 5, 10, 7, 14, 12]
+*/
+
+class ArrayQ3
+{
+	public static void main(String[] arge)
+	{
+	int a[] = { 1, 2, 4, 9, 5, 3, 8, 7, 10, 12, 14 };
+	
+	for (int i=1;i<a.length-1;i=i+2)
+	{
+		int temp = a[i];
+		a[i] = a[i+1];
+		a[i+1] = temp;
+	}
+	
+	System.out.println("rearrange array :");
+	for (int i=0;i<a.length;i++)
+	{
+		System.out.print(a[i]+" ");		
+	}
+
+	}
+}
 
 ===================================================================================
 ===================================================================================
+/*
+4.Write a Java program to replace each element of the array with product of every other element in a given array of integers.
+
+Example:
+Input :
+nums1 = { 1, 2, 3, 4, 5, 6, 7}
+nums2 = {0, 1, 2, 3, 4, 5, 6, 7}
+Output:
+Array with product of every other element:
+[5040, 2520, 1680, 1260, 1008, 840, 720]
+Array with product of every other element:
+[5040, 0, 0, 0, 0, 0, 0, 0]
+*/
+
+class ArrayQ4
+{
+	public static void main(String arg[])
+	{
+	int nums1[] = { 1, 2, 3, 4, 5, 6, 7};
+	//int nums2[] = {0, 1, 2, 3, 4, 5, 6, 7};
+	int product = 1;
+	int zeroCount = 0;
+	
+
+	// first way
+	for (int i=0;i<nums1.length;i++)
+	{
+		if (nums1[i] != 0)
+		{
+			product = product*nums1[i];
+		}
+		else 
+		{
+			zeroCount++;		
+		}
+	}
+	
+	int nums3[] = new int[nums1.length];
+
+	for (int i=0;i<nums3.length;i++)
+	{
+		if (zeroCount >1)
+		{
+			nums3[i] = 0;
+		}
+		else if (zeroCount == 1)
+		{
+			if (nums3[i] == 0)
+			{
+				nums3[i] = product;
+			}
+			else 
+			{
+				nums3[i] = 0;	
+			}
+			
+		}
+		else
+		{
+			nums3[i] = product/nums1[i];
+		}
+	}
+	
+	System.out.println("First way to :");
+	for (int i=0;i<nums3.length;i++)
+	{
+		System.out.print(nums3[i]+" ");	
+	}
+	
+	// 2nd way 
+	int nums4[] = new int[nums1.length];
+	
+	for (int i=0;i<nums1.length;i++)
+	{
+		int dproduct = 1;
+		for (int j=0;j<nums1.length;j++)
+		{
+			if (i==j)
+			{
+				continue;
+			}
+			else 
+			{
+				dproduct = dproduct*nums1[j];
+			}
+				
+		}
+		nums4[i] = dproduct;
+	}
+	
+	System.out.println("\n2nd way to :");
+	for (int i=0;i<nums4.length;i++)
+	{
+		System.out.print(nums4[i]+" ");	
+	}
+	}
+}
+===================================================================================
+===================================================================================
+/*
+5. Write a Java program to find maximum difference between two elements in a given array of integers such that smaller element appears before larger element.
+
+Example:
+Input :
+nums = { 2, 3, 1, 7, 9, 5, 11, 3, 5 }
+Output:
+The maximum difference between two elements of the said array elements
+10
+*/
+
+class ArrayQ5
+{
+	public static void main(String[] arge)
+	{
+	int a[] = { 2, 3, 1, 7, 9, 5, 11, 3, 5 };
+	
+	for (int i=0;i<a.length;i++)
+	{
+		for (int j=i+1;j<a.length;j++)
+		{
+			if (a[i]>a[j])
+			{
+				int temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+		}
+	}
+	
+	System.out.println("The maximum diffrerebce between two elements of the said array elements is :"+(a[a.length-1]-a[0]));
+	}
+}
+===================================================================================
+===================================================================================
+/*
+6. Find a peak element which is not smaller than its neighbours
+
+Input: array[]= {5, 10, 20, 15}
+Output: 20
+Explanation: The element 20 has neighbors 10 and 15, both of them are less than 20.
+
+Input: array[] = {10, 20, 15, 2, 23, 90, 67}
+Output: 20 or 90
+Explanation: The element 20 has neighbors 10 and 15, both of them are less than 20, similarly 90 has neighbors 23 and 67.
+*/
+
+class ArrayQ6
+{
+	public static void main(String[] arge)
+	{
+	int a[] = {5, 10, 20, 15};
+	int b[] = {10, 20, 15, 2, 23, 90, 67};
+
+	System.out.println("Output Array A peak element is");
+	for (int i=1;i<a.length-1;i++)
+	{
+		if (a[i-1]<a[i] && a[i]>a[i+1])
+		{
+			System.out.print(a[i]);
+		}
+	}
+	
+	System.out.println("\nOutput Array B peak element is");
+	for (int i=1;i<b.length-1;i++)
+	{
+		if (b[i-1]<b[i] && b[i]>b[i+1])
+		{
+			System.out.print(b[i]+" ");
+		}
+	}
+	}
+}
+===================================================================================
+===================================================================================
+/*
+7.K’th Largest Element in Unsorted Array
+Input: arr[] = {7, 10, 4, 3, 20, 15}, K = 3
+Output: 7
+
+Input: arr[] = {7, 10, 4, 3, 20, 15}, K = 4
+Output: 10
+*/
+
+class ArrayQ7
+{
+	public static void main(String[] arge)
+	{
+	int arr[] = {7, 10, 4, 3, 20, 15};
+	int k =3;
+	//int k =4;
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		for (int j=i+1;j<arr.length;j++)
+		{
+			if (arr[i]>arr[j])
+			{
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+	
+	System.out.println("Output :"+arr[k-1]);
+	}
+}
+===================================================================================
+===================================================================================
+/*
+8. Move all negative numbers to beginning and positive to end with constant extra space
+Input: -12, 11, -13, -5, 6, -7, 5, -3, -6
+Output: -12 -13 -5 -7 -3 -6 11 6 5
+*/
+
+class Question8
+{
+	public static void main(String[] arge)
+	{
+	int arr[] = { -12, 11, -13, -5, 6, -7, 5, -3, -6};
+	int arrt[] = new int[arr.length];
+
+	int x = 0;
+	for (int i=0;i<arrt.length;i++)
+	{
+		if (arr[i]<0)
+		{
+			arrt[x]=arr[i];
+			x++;
+		}
+	}
+	
+	for (int i=0;i<arrt.length;i++)
+	{
+		if (arr[i]>0)
+		{
+			arrt[x]=arr[i];
+			x++;
+		}
+	}
+
+	
+	System.out.print("Output array is:");
+	for (int i=0;i<arrt.length;i++)
+	{
+		System.out.print(arrt[i]+" ");
+	}
+	}
+}
+===================================================================================
+===================================================================================
+/*
+Q9.Union and Intersection of two sorted arrays
+Input: arr1[] = {1, 3, 4, 5, 7}
+        arr2[] = {2, 3, 5, 6}
+Output: Union : {1, 2, 3, 4, 5, 6, 7}
+         Intersection : {3, 5}
+
+Input: arr1[] = {2, 5, 6}
+        arr2[] = {4, 6, 8, 10}
+Output: Union : {2, 4, 5, 6, 8, 10}
+         Intersection : {6}
+*/
+
+class Question9
+{
+	public static void main(String[] arge)
+	{
+	int arr1[] = {1, 3, 4, 5, 7};
+
+	int arr2[] = {2, 3, 5, 6};
+	
+	int uninter[] = new int[arr1.length+arr2.length];
+
+	for (int i=0;i<arr1.length;i++)
+	{
+		uninter[i]=arr1[i];
+		
+	}
+		
+	for (int i=0;i<arr2.length;i++)
+	{
+		uninter[arr1.length+i]=arr2[i];
+		
+	}
+	
+	System.out.println("\nIntersection Arrays is :");
+	for (int i=0;i<uninter.length;i++)
+	{
+		for (int j=i+1;j<uninter.length;j++)
+		{	
+			if (uninter[i] == uninter[j])
+			{
+				System.out.print(uninter[i]+" ");
+			}
+		}
+	}
+
+	
+	System.out.println("\nUnion Arrays is :");
+	for (int i=0;i<uninter.length;i++)
+	{
+		for (int j=i+1;j<uninter.length;j++)
+		{
+			if (uninter[i] == uninter[j])
+			{
+				uninter[i] = -1;
+			}
+		}
+	}
+		
+	for (int i=0;i<uninter.length;i++)
+	{
+		if (uninter[i] != -1)
+		{
+				System.out.print(uninter[i]+" ");
+		}
+	}	
+
+	}
+}
+===================================================================================
+===================================================================================
+/*
+Q10. Program to cyclically rotate an array by one
+Input:  arr[] = {1, 2, 3, 4, 5}
+Output: arr[] = {5, 1, 2, 3, 4}
+*/
+
+
+class Question10
+{
+	public static void main(String[] arge)
+	{
+	int arr[] = {1, 2, 3, 4, 5};
+	
+	int temp = arr[arr.length-1];
+	for (int i=arr.length-1;i>0;i--)
+	{
+		int tempa = arr[i];
+		arr[i] = arr[i-1];
+		arr[i-1] = temp;	
+
+	}
+	arr[0] = temp;
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		System.out.print(arr[i]+" ");
+	}
+	}
+}
+===================================================================================
+===================================================================================
+/*
+Q12. Count pairs with given sum
+nput:  arr[] = {1, 5, 7, -1}, sum = 6
+Output:  2
+Explanation: Pairs with sum 6 are (1, 5) and (7, -1).
+
+Input:  arr[] = {1, 5, 7, -1, 5}, sum = 6
+Output:  3
+Explanation: Pairs with sum 6 are (1, 5), (7, -1) & (1, 5).
+*/
+
+
+class Question12
+{
+	public static void main(String[] arge)
+	{
+	int arr[] = {1, 5, 7, -1, 5};
+	int sum = 6;
+	
+	System.out.println("Output is :");
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		for (int j=i+1;j<arr.length;j++)
+		{
+			if ((arr[i]+arr[j]) == sum)
+			{
+				System.out.print("("+arr[i]+" "+arr[j]+") ");
+			}
+		}
+	}
+	
+	}
+}
 
 ===================================================================================
 ===================================================================================
+/*Q1.Given an array arr[] of integers. Find a peak element i.e. an element that is not smaller than its neighbors.
+
+ Note: For corner elements, we need to consider only one neighbor.
+
+  Example:
+ Input: array[]= {5, 10, 20, 15}
+ Output: 20*/
+
+
+class Question01
+{
+	public static void main(String[] arge)
+	{
+	int arr[] =  {10, 20, 15, 2, 23, 90, 67};
+	
+	System.out.println("Peak elements is:");
+	if (arr[0] >arr[1])
+	{
+		System.out.print(arr[0]);
+	}
+		
+	for (int i=1;i<arr.length;i++)
+	{
+		if (arr[i-1]<arr[i] && arr[i]>arr[i+1])
+		{
+			System.out.print(arr[i]+" ");
+		}
+	}
+
+	}
+}
+===================================================================================
+===================================================================================
+/*Q2.Given an array and a number K where K is smaller than the size of the array.
+  Find the K’th smallest element in the given array. Given that all array elements are distinct.
+
+Examples:  
+
+Input: arr[] = {7, 10, 4, 3, 20, 15}, K = 3
+Output: 7*/
+
+class Question02
+{
+	public static void main(String[] arge)
+	{
+	int arr[] = {7, 10, 4, 3, 20, 15};
+	int k =3;
+	
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		for (int j=i+1;j<arr.length;j++)
+		{
+			if (arr[i]>arr[j])
+			{
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+	
+	System.out.println("Output :"+arr[k-1]);
+	}
+
+}
+===================================================================================
+===================================================================================
+/*
+Q3.Given a sorted array arr[] and a number x, write a function that counts the occurrences of x in arr[].
+  Examples:
+  Input: arr[] = {1, 1, 2, 2, 2, 2, 3,},   x = 2
+  Output: 4 // x (or 2) occurs 4 times in arr[]
+*/
+
+class Question03
+{
+	public static void main(String[] arge)
+	{
+	int arr[] = {1, 1, 2, 2, 2, 2, 3,};
+	int x = 2;
+	int count = 0;
+	for (int i=0;i<arr.length;i++)
+	{
+		if (x == arr[i])
+		{
+			count++;
+		}
+	}
+	
+	System.out.println("Occurrences of x is :"+count);
+	}
+}
+===================================================================================
+===================================================================================
+/*
+Q4.Given an array A[] consisting of only 0s, 1s, and 2s. The task is to write a function that sorts the given array.
+   The functions should put all 0s first, then all 1s and all 2s in last
+*/
+
+class Question04
+{
+	public static void main(String[] arge)
+	{
+	int arr[] ={0, 1, 2, 1, 0, 1, 2, 1, 0};
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		for (int j=i+1;j<arr.length;j++)
+		{
+			if (arr[i] > arr[j])
+			{
+				int temp = arr[i];	
+				arr[i] = arr[j];
+				arr[j] = temp;	
+			}
+		}
+	}
+	
+	System.out.println("Sorted Array is:");
+	for (int i=0;i<arr.length;i++)
+	{
+		System.out.print(arr[i]+" ");
+	}
+	}
+}
+===================================================================================
+===================================================================================
+/*
+Q5.Given two sorted arrays, find their union and intersection.
+Example:
+
+ Input: arr1[] = {1, 3, 4, 5, 7}
+        arr2[] = {2, 3, 5, 6}
+ Output: Union : {1, 2, 3, 4, 5, 6, 7}
+         Intersection : {3, 5}
+*/
+
+class Question05
+{
+	public static void main(String[] arge)
+	{
+	int arr1[] = {1, 3, 4, 5, 7};
+
+	int arr2[] = {2, 3, 5, 6};
+	
+	int uninter[] = new int[arr1.length+arr2.length];
+
+	for (int i=0;i<arr1.length;i++)
+	{
+		uninter[i]=arr1[i];
+		
+	}
+		
+	for (int i=0;i<arr2.length;i++)
+	{
+		uninter[arr1.length+i]=arr2[i];
+		
+	}
+	
+	System.out.println("\nIntersection Arrays is :");
+	for (int i=0;i<uninter.length;i++)
+	{
+		for (int j=i+1;j<uninter.length;j++)
+		{	
+			if (uninter[i] == uninter[j])
+			{
+				System.out.print(uninter[i]+" ");
+			}
+		}
+	}
+
+	
+	System.out.println("\nUnion Arrays is :");
+	for (int i=0;i<uninter.length;i++)
+	{
+		for (int j=i+1;j<uninter.length;j++)
+		{
+			if (uninter[i] == uninter[j])
+			{
+				uninter[i] = -1;
+			}
+		}
+	}
+		
+	for (int i=0;i<uninter.length;i++)
+	{
+		if (uninter[i] != -1)
+		{
+				System.out.print(uninter[i]+" ");
+		}
+	}	
+
+	}
+
+}
+===================================================================================
+===================================================================================
+/*
+Q6.Given an array, cyclically rotate the array clockwise by one.
+
+Examples:  
+
+Input:  arr[] = {1, 2, 3, 4, 5}
+Output: arr[] = {5, 1, 2, 3, 4}
+*/
+
+
+class Question06
+{
+	public static void main(String[] arge)
+	{
+	int arr[] = {1, 2, 3, 4, 5};
+	
+	int temp = arr[arr.length-1];
+	for (int i=arr.length-1;i>0;i--)
+	{
+		int tempa = arr[i];
+		arr[i] = arr[i-1];
+		arr[i-1] = temp;	
+
+	}
+	arr[0] = temp;
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		System.out.print(arr[i]+" ");
+	}
+	}
+}
+===================================================================================
+===================================================================================
+/*
+Q8.Given three arrays sorted in non-decreasing order, print all common elements in these arrays.
+
+Examples:
+
+ Input:
+ar1[] = {1, 5, 10, 20, 40, 80}
+ar2[] = {6, 7, 20, 80, 100}
+ar3[] = {3, 4, 15, 20, 30, 70, 80, 120}
+Output: 20, 80
+*/
+
+class Question08
+{
+	public static void main(String[] arge)
+	{
+	int ar1[] = {1, 5, 10, 20, 40, 80};
+	int ar2[] = {6, 7, 20, 80, 100};
+	int ar3[] = {3, 4, 15, 20, 30, 70, 80, 120};
+	
+	System.out.println("Common elements is:");
+	
+	for (int i=0;i<ar1.length;i++)
+	{
+		for (int j=0;j<ar2.length;j++)
+		{
+			for (int k=0;k<ar3.length;k++)
+			{
+				if (ar1[i] == ar2[j] && ar2[j] == ar3[k])
+				{
+					System.out.print(ar1[i]+" ");		
+				}
+			}
+		}
+	}
+	}
+}
+===================================================================================
+===================================================================================
+/*
+Q9.Given an array of integers arr[], The task is to find the index of first repeating element in it i.e.
+  the element that occurs more than once and whose index of the first occurrence is the smallest.
+
+Examples:
+
+  Input: arr[] = {10, 5, 3, 4, 3, 5, 6}
+  Output: 5
+*/
+
+class Question09
+{
+	public static void main(String[] arge)
+	{
+	int arr[] = {10, 5, 3, 4, 3, 5, 6};
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		int count=1;
+		for (int j=i+1;j<arr.length;j++)
+		{
+			if (arr[i] == arr[j])
+			{
+				System.out.print("Repeating first element is :"+j);
+				count++;
+			}
+		}
+		if (count>1)
+		{
+			break;
+		}
+	}
+		
+	}
+}
+===================================================================================
+===================================================================================
+/*
+Q10.Given the heights of N towers and a value of K, Either increase or decrease the height of every tower by K (only once) where K > 0. After modifications,
+   the task is to minimize the difference between the heights of the longest and the shortest tower and output its difference.
+
+ Examples:
+
+  Input: arr[] = {1, 15, 10}, k = 6
+   Output:  Minimum difference is 5.
+  Explanation: Change 1 to 7, 15 to 9 and 10 to 4. Maximum difference is 5 (between 4 and 9). We can’t get a lower difference.
+*/
+
+class Question010
+{
+	public static void main(String[] arge)
+	{
+	int arr[] = {1, 15, 10};
+	int k = 6;
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		if (arr[i] > k)
+		{
+			arr[i] = arr[i] -6;	
+		}
+		else 
+		{	
+			arr[i] = arr[i] + 6;
+		}
+	}
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		for (int j=i+1;j<arr.length;j++)
+		{
+			if (arr[i]>arr[j])
+			{
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		System.out.print(arr[i]+" ");
+	}
+	
+	System.out.println("Minimum difference is:"+(arr[arr.length-1]-arr[0]));
+	}
+}
 
 ===================================================================================
 ===================================================================================
+/*
+Q12.Find the majority element in the array. A majority element in an array A[] of size n is an element that appears more than n/2 times (and hence there is at most one such element).
 
-===================================================================================
-===================================================================================
+  Examples :
 
-===================================================================================
-===================================================================================
+  Input : {3, 3, 4, 2, 4, 4, 2, 4, 4}
+  Output : 4
+*/
+	
+class Question012
+{
+	public static void main(String[] arge)
+	{
+	int arr[] = {3, 3, 4, 2, 4, 4, 2, 4, 4};
+	
+	
+	for (int i=0;i<arr.length;i++)
+	{
+		int count = 1;
 
+		for (int j=i+1;j<arr.length;j++)
+		{
+			if (arr[i] == arr[j])
+			{
+				count++;
+			}	
+		}
+	
+		if (count > arr.length/2)
+		{
+			System.out.println("Output is:"+arr[i]+" and count is "+count);
+		
+		}	
+	}	
+	}
+}
 ===================================================================================
 ===================================================================================
+/*
+Q13. Given two sorted arrays A and B of size p and q, write a Java program to merge elements of A with B by maintaining the sorted order i.e.
+ fill A with first p smallest elements and fill B with remaining elements.
+ Example:
+ Input :
+ int[] A = { 1, 5, 6, 7, 8, 10 }
+ int[] B = { 2, 4, 9 }
+ Output:
+ Sorted Arrays:
+ A: [1, 2, 4, 5, 6, 7]
+ B: [8, 9, 10]
+*/
 
-===================================================================================
-===================================================================================
+class Question13
+{
+	public static void main(String[] arge)
+	{
+	int a[] = { 1, 5, 6, 7, 8, 10 };
+	int b[] = { 2, 4, 9 };
+	
+	int c[] = new int[a.length+b.length];
+	
+	for (int i=0;i<a.length;i++)
+	{
+		c[i] = a[i];
+	}
+	
+	for (int i=0;i<b.length;i++)
+	{
+		c[a.length+i] = b[i];
+	}
 
-===================================================================================
-===================================================================================
 
-===================================================================================
-===================================================================================
+	for (int i=0;i<c.length;i++)
+	{
+		for (int j=i+1;j<c.length;j++)
+		{
+			if (c[i]>c[j])
+			{
+				int temp = c[i];
+				c[i] = c[j];
+				c[j] = temp;
+			}
+		}
+	}
+	
+	System.out.println("\nArray A is:");
+	for (int i=0;i<a.length;i++)
+	{
+		a[i]=c[i];
+		System.out.print(a[i]+" ");
+		
+	}
+	
+	System.out.println("\nArray B is :");
+	for (int i=0;i<b.length;i++)
+	{
+		b[i]=c[a.length+i];
+		System.out.print(b[i]+" ");
+	}
+	
+	
+		
+	
 
+	}
+}
 ===================================================================================
 ===================================================================================
+/*
+ Q14.Write a Java program to find maximum product of two integers in a given array of integers.
 
-===================================================================================
-===================================================================================
+ Example:
+ Input :
+ nums = { 2, 3, 5, 7, -7, 5, 8, -5 }
+ Output:
+ Pair is (7, 8), Maximum Product: 56
+*/
 
-===================================================================================
-===================================================================================
-
-===================================================================================
-===================================================================================
-
-===================================================================================
-===================================================================================
-
-===================================================================================
-===================================================================================
-
+class Question14
+{
+	public static void main(String[] arge)
+	{
+	int nums[] = { 2, 3, 5, 7, -7, 5, 8, -5 };
+	
+	for (int i=0;i<nums.length;i++)
+	{
+		for (int j=i+1;j<nums.length;j++)
+		{
+			if (nums[i]<nums[j])
+			{
+				int temp = nums[i];
+				nums[i] = nums[j];
+				nums[j] = temp;
+				
+			}
+		}
+	}
+	
+	System.out.println("Maximun product is : "+(nums[0]*nums[1]));
+	}
+}
 ===================================================================================
 ===================================================================================
 

@@ -15,27 +15,14 @@ class ArrayQ3
 	{
 	int a[] = { 1, 2, 4, 9, 5, 3, 8, 7, 10, 12, 14 };
 	
-	for (int i=0;i<a.length;i++)
+	for (int i=1;i<a.length-1;i=i+2)
 	{
-		for (int j=i+1;j<a.length;j++)
-		{
-			if (a[i] <a[j])
-			{
-				int temp  = a[i];
-				a[i] = a[j];
-				a[j] = temp;
-			}
-			if (a[i]>a[j])
-			{
-				int temp  = a[i];
-				a[i] = a[j];
-				a[j] = temp;
-			}
-
-			
-		}
+		int temp = a[i];
+		a[i] = a[i+1];
+		a[i+1] = temp;
 	}
 	
+	System.out.println("rearrange array :");
 	for (int i=0;i<a.length;i++)
 	{
 		System.out.print(a[i]+" ");		
